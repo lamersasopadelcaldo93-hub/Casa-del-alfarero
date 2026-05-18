@@ -157,30 +157,6 @@
 
       </div>
 
-      <div class="proof-box">
-
-        <input type="file">
-
-        <input type="text" placeholder="Número de comprobante">
-
-        <button>Enviar comprobante</button>
-
-      </div>
-
-    </div>
-
-    <div class="paypal-box">
-
-      <div>
-        <h2>Donar con PayPal</h2>
-        <p>Es rápido, seguro y puedes donar desde cualquier país.</p>
-      </div>
-
-      <a href="https://paypal.com" target="_blank">
-        <i class="fa-brands fa-paypal"></i>
-        Donar
-      </a>
-
     </div>
 
     <div class="form-card">
@@ -192,9 +168,7 @@
 
       <p class="form-note">Envía tu mensaje directamente al correo de la iglesia. Ingresa tu nombre y tu correo para que podamos contactarte.</p>
 
-      <form id="contact-form" action="https://formsubmit.co/leonardoyassercontrerasroa@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="Mensaje desde formulario de donaciones">
-        <input type="hidden" name="_captcha" value="false">
+      <form id="contact-form" action="/api/send-donation" method="POST">
 
         <div class="input-group">
           <label for="donor-name">Nombre completo</label>
@@ -223,7 +197,7 @@
 
 </section>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contact-form');
@@ -244,30 +218,26 @@
         return;
       }
 
-      const formData = new FormData(form);
-      formData.set('_subject', 'Mensaje desde formulario de donaciones');
-      formData.set('_captcha', 'false');
+      const payload = { name, email, message };
 
       fetch(form.action, {
         method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
       })
       .then(response => response.json())
       .then(data => {
-        if (data.success) {
-          statusMessage.textContent = 'Gracias, tu mensaje fue enviado correctamente.';
+        if (data && data.success) {
+          statusMessage.textContent = 'Gracias, tu información fue enviada correctamente.';
           statusMessage.style.color = '#166534';
           form.reset();
         } else {
-          statusMessage.textContent = 'No se pudo enviar el mensaje. Intenta de nuevo más tarde.';
+          statusMessage.textContent = (data && data.error) ? data.error : 'No se pudo enviar la información. Intenta de nuevo más tarde.';
           statusMessage.style.color = '#b91c1c';
         }
       })
       .catch(() => {
-        statusMessage.textContent = 'Ocurrió un error al enviar el mensaje. Intenta de nuevo.';
+        statusMessage.textContent = 'Ocurrió un error al enviar la información. Intenta de nuevo.';
         statusMessage.style.color = '#b91c1c';
       });
     });

@@ -271,8 +271,8 @@ body {
 
 .folder-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 22px 40px rgba(0, 0, 0, 0.12);
-  border-color: rgba(212,175,105,0.5);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.16);
+  border-color: rgba(212,175,105,0.6);
 }
 
 .folder-card-button {
@@ -288,6 +288,40 @@ body {
   background-color: #dcd7ce;
   background-size: cover;
   background-position: center;
+}
+
+/* Ajustes responsivos: hacer las tarjetas más anchas lateralmente sin pegarse a los bordes */
+/* Ajustes responsivos: hacer las tarjetas más anchas lateralmente sin pegarse a los bordes */
+#ministerios {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Grid por defecto (móvil): una columna para que las tarjetas se apilen */
+#ministerios .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  /* Dos columnas en pantallas medianas */
+  #ministerios .grid {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* En pantallas grandes forzar 4 columnas con min-width flexible y reducir padding para acercar a las orillas */
+  #ministerios .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  #ministerios {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 .folder-card-content {
@@ -510,9 +544,27 @@ footer {
   transition: all 0.3s ease;
 }
 
+/* Mostrar hamburguesa solo en pantallas pequeñas */
+@media (min-width: 768px) {
+  #hamburger-btn {
+    display: none !important;
+  }
+  #mobile-menu {
+    display: none !important;
+  }
+}
+
 #mobile-menu {
-  transition: all 0.3s ease;
-  max-height: 500px;
+  transition: all 0.28s ease;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 45;
+  background: rgba(17,24,39,0.98);
 }
 
 #mobile-menu.hidden {

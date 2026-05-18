@@ -1,0 +1,14 @@
+{
+  "name": "casadelalfarero-site-backend",
+  "version": "1.0.0",
+  "description": "Servidor para recibir formularios y enviar correos (sitio Casa del Alfarero)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.1"
+  }
+}
