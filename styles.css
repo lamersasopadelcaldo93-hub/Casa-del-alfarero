@@ -193,49 +193,24 @@ body {
   color: #e8e4dc;
 }
 
-#navbar .nav-links a {
+#navbar .nav-links a,
+#navbar a,
+#mobile-menu a {
   color: #e8e4dc;
-  transition: color 0.25s ease;
+  transition: color 0.25s ease, transform 0.25s ease;
 }
 
-#navbar .nav-links a:nth-child(1):hover {
-  color: #7dd3fc !important;
-}
-
-#navbar .nav-links a:nth-child(2):hover {
-  color: #38bdf8 !important;
-}
-
-#navbar .nav-links a:nth-child(3):hover {
-  color: #22d3ee !important;
-}
-
-#navbar .nav-links a:nth-child(4):hover {
-  color: #38bdf8 !important;
-}
-
-#navbar .nav-links a:nth-child(5):hover {
+#navbar .nav-links a:hover,
+#navbar .nav-links a:focus,
+#navbar .nav-links a:active,
+#navbar a:hover,
+#navbar a:focus,
+#navbar a:active,
+#mobile-menu a:hover,
+#mobile-menu a:focus,
+#mobile-menu a:active {
   color: #5ed3f3 !important;
-}
-
-#navbar .nav-links a:nth-child(6):hover {
-  color: #0ea5e9 !important;
-}
-
-#navbar .nav-links a:nth-child(7):hover {
-  color: #38bdf8 !important;
-}
-
-#navbar .nav-links a:nth-child(8):hover {
-  color: #60a5fa !important;
-}
-
-#navbar .nav-links a:nth-child(9):hover {
-  color: #7dd3fc !important;
-}
-
-#navbar .nav-links a:nth-child(10):hover {
-  color: #5ed3f3 !important;
+  transform: translateX(2px);
 }
 
 #inicio {
@@ -711,44 +686,19 @@ footer {
     transition: color 0.25s ease;
   }
   
-  #mobile-menu a:nth-child(1):hover {
-    color: #7dd3fc;
+  #mobile-menu a {
+    display: block;
+    padding: 0.75rem 0;
+    font-size: 0.95rem;
+    color: #c9c3b8;
+    transition: color 0.25s ease, transform 0.2s ease;
   }
-  
-  #mobile-menu a:nth-child(2):hover {
-    color: #38bdf8;
-  }
-  
-  #mobile-menu a:nth-child(3):hover {
-    color: #22d3ee;
-  }
-  
-  #mobile-menu a:nth-child(4):hover {
-    color: #38bdf8;
-  }
-  
-  #mobile-menu a:nth-child(5):hover {
+
+  #mobile-menu a:hover,
+  #mobile-menu a:focus,
+  #mobile-menu a:active {
     color: #5ed3f3;
-  }
-  
-  #mobile-menu a:nth-child(6):hover {
-    color: #0ea5e9;
-  }
-  
-  #mobile-menu a:nth-child(7):hover {
-    color: #38bdf8;
-  }
-  
-  #mobile-menu a:nth-child(8):hover {
-    color: #60a5fa;
-  }
-  
-  #mobile-menu a:nth-child(9):hover {
-    color: #7dd3fc;
-  }
-  
-  #mobile-menu a:nth-child(10):hover {
-    color: #5ed3f3;
+    transform: translateX(4px);
   }
 }
 
