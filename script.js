@@ -15,13 +15,14 @@ function updateLanguage() {
   
   // Actualizar elemento de idioma actual
   const languageMap = { es: 'ES', en: 'EN', fr: 'FR', pt: 'PT' };
-  document.getElementById('current-language').textContent = languageMap[lang] || 'ES';
+  const currentLanguageEl = document.getElementById('current-language');
+  if (currentLanguageEl) currentLanguageEl.textContent = languageMap[lang] || 'ES';
   
   // Actualizar todos los elementos con data-translate
   document.querySelectorAll('[data-translate]').forEach(element => {
     const key = element.getAttribute('data-translate');
-    const translation = getTranslation(key, lang);
-    element.textContent = translation;
+    const translation = typeof getTranslation === 'function' ? getTranslation(key, lang) : '';
+    if (translation) element.textContent = translation;
   });
 }
 
@@ -31,7 +32,7 @@ const mobileMenu = document.getElementById('mobile-menu');
 const hamburgerIcon = document.getElementById('hamburger-icon');
 const closeIcon = document.getElementById('close-icon');
 
-if (hamburgerBtn) {
+if (hamburgerBtn && mobileMenu && hamburgerIcon && closeIcon) {
   hamburgerBtn.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
     hamburgerIcon.classList.toggle('hidden');
@@ -49,10 +50,13 @@ if (hamburgerBtn) {
 }
 
 // Actualizar idioma al cargar
-document.addEventListener('DOMContentLoaded', updateLanguage);
+document.addEventListener('DOMContentLoaded', () => {
+  updateLanguage();
 
-// Actualizar textos
-document.getElementById('nav-name').textContent = config.church_name;
+  // Actualizar textos
+  const navNameEl = document.getElementById('nav-name');
+  if (navNameEl) navNameEl.textContent = config.church_name;
+});
 
 const sectionLogoBackgrounds = document.querySelectorAll('.section-logo-bg');
 
@@ -168,7 +172,7 @@ const albumModalClose = document.getElementById('albumModalClose');
 
 function openAlbum(albumKey) {
   const album = albumData[albumKey];
-  if (!album) return;
+  if (!album || !albumModal || !albumModalTitle || !albumModalSubtitle || !albumModalGrid) return;
 
   albumModalTitle.textContent = album.title;
   albumModalSubtitle.textContent = album.description;
@@ -190,17 +194,18 @@ function openAlbum(albumKey) {
 }
 
 function closeAlbum() {
+  if (!albumModal) return;
   albumModal.classList.add('hidden');
   document.body.style.overflow = '';
 }
 
-albumModalClose.addEventListener('click', closeAlbum);
-albumModal.addEventListener('click', (event) => {
+if (albumModalClose) albumModalClose.addEventListener('click', closeAlbum);
+if (albumModal) albumModal.addEventListener('click', (event) => {
   if (event.target === albumModal) closeAlbum();
 });
 
 window.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && !albumModal.classList.contains('hidden')) {
+  if (event.key === 'Escape' && albumModal && !albumModal.classList.contains('hidden')) {
     closeAlbum();
   }
 });

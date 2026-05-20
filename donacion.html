@@ -197,54 +197,80 @@
 
 </section>
 
+
     <script src="script.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('contact-form');
-    const statusMessage = document.createElement('p');
-    statusMessage.className = 'form-status';
-    form.parentNode.insertBefore(statusMessage, form.nextSibling);
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('contact-form');
+      if (!form) return;
 
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
+      const statusMessage = document.createElement('p');
+      statusMessage.className = 'form-status';
+      form.parentNode.insertBefore(statusMessage, form.nextSibling);
 
-      const name = document.getElementById('donor-name').value.trim();
-      const email = document.getElementById('donor-email').value.trim();
-      const message = document.getElementById('donor-message').value.trim();
+      const submitBtn = form.querySelector('button[type="submit"]');
 
-      if (!name || !email || !message) {
-        statusMessage.textContent = 'Por favor completa todos los campos antes de enviar.';
-        statusMessage.style.color = '#b91c1c';
-        return;
-      }
+      form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        if (submitBtn) submitBtn.disabled = true;
 
-      const payload = { name, email, message };
+        const nameEl = document.getElementById('donor-name');
+        const emailEl = document.getElementById('donor-email');
+        const messageEl = document.getElementById('donor-message');
 
-      fetch(form.action, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data && data.success) {
-          statusMessage.textContent = 'Gracias, tu información fue enviada correctamente.';
-          statusMessage.style.color = '#166534';
-          form.reset();
-        } else {
-          statusMessage.textContent = (data && data.error) ? data.error : 'No se pudo enviar la información. Intenta de nuevo más tarde.';
+        const name = nameEl ? nameEl.value.trim() : '';
+        const email = emailEl ? emailEl.value.trim() : '';
+        const message = messageEl ? messageEl.value.trim() : '';
+
+        if (!name || !email || !message) {
+          statusMessage.textContent = 'Por favor completa todos los campos antes de enviar.';
           statusMessage.style.color = '#b91c1c';
+          if (submitBtn) submitBtn.disabled = false;
+          return;
         }
-      })
-      .catch(() => {
-        statusMessage.textContent = 'Ocurrió un error al enviar la información. Intenta de nuevo.';
-        statusMessage.style.color = '#b91c1c';
+
+        const payload = { name, email, message };
+        const apiEndpoint = (['localhost', '127.0.0.1'].includes(window.location.hostname) && window.location.port !== '3000')
+          ? `${window.location.protocol}//${window.location.hostname}:3000/api/send-donation`
+          : new URL('/api/send-donation', window.location.origin).href;
+        console.log('Sending donation to endpoint:', apiEndpoint);
+
+        try {
+          const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          // Leer primero como texto y luego intentar parsear JSON (evita 'body stream already read')
+          const text = await response.text();
+          let parsed = null;
+          try {
+            parsed = text ? JSON.parse(text) : null;
+          } catch (e) {
+            parsed = null;
+          }
+
+          if (response.ok && parsed && parsed.success) {
+            statusMessage.textContent = 'Gracias, tu información fue enviada correctamente.';
+            statusMessage.style.color = '#166534';
+            form.reset();
+          } else {
+            const errText = (parsed && parsed.error) ? parsed.error : (text || 'No se pudo enviar la información. Intenta de nuevo más tarde.');
+            throw new Error(errText);
+          }
+        } catch (err) {
+          console.error('Error al enviar formulario:', err);
+          statusMessage.textContent = err && err.message ? err.message : 'Ocurrió un error al enviar la información. Intenta de nuevo.';
+          statusMessage.style.color = '#b91c1c';
+        } finally {
+          if (submitBtn) submitBtn.disabled = false;
+        }
       });
     });
-  });
-</script>
-</body>
+    </script>
+  </body>
 </html>
-```
+
 
 
