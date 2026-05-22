@@ -6,6 +6,75 @@ html, body {
   box-sizing: border-box;
 }
 
+html {
+  touch-action: pan-y pinch-zoom;
+}
+
+body {
+  min-width: 320px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+textarea,
+button {
+  min-width: 0;
+}
+
+.touch-hover,
+.touch-hover h1,
+.touch-hover h2,
+.touch-hover h3,
+.touch-hover h4,
+.touch-hover p,
+.touch-hover span,
+.touch-hover label,
+.touch-hover button,
+.touch-hover strong,
+.touch-hover em,
+.touch-hover a,
+.touch-hover input,
+.touch-hover textarea {
+  color: #5ed3f3 !important;
+}
+
+.bank-card.touch-hover,
+.hero-item.touch-hover,
+.section-header.touch-hover,
+.account.touch-hover,
+.form-card.touch-hover,
+.payment-card.touch-hover,
+.verse-box.touch-hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  border-color: rgba(94, 211, 243, 0.35);
+}
+
+.bank-card.touch-hover .bank-title,
+.bank-card.touch-hover .account h4,
+.bank-card.touch-hover .account-details p,
+.bank-card.touch-hover .section-header span,
+.bank-card.touch-hover .section-header h2,
+.bank-card.touch-hover .top-label,
+.hero-item.touch-hover i,
+.section-header.touch-hover i {
+  color: #5ed3f3;
+}
+
+.bank-card.touch-hover .bank-logo,
+.hero-item.touch-hover i,
+.section-header.touch-hover i {
+  filter: grayscale(100%) brightness(1.15) sepia(15%) saturate(400%) hue-rotate(165deg);
+}
+
 .font-heading {
   font-family: 'Playfair Display', serif;
 }

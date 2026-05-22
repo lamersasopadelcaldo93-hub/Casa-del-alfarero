@@ -8,6 +8,63 @@ const config = {
   address_text: 'Del tanque de la policia 1c.s,'
 };
 
+// Efecto hover táctil en móviles: resalta mientras deslizas el dedo
+const touchHoverSelectors = [
+  '.bank-card',
+  '.hero-item',
+  '.section-header',
+  '.account',
+  '.form-card',
+  '.payment-card',
+  '.verse-box',
+  '.bank-title',
+  '.top-label',
+  'a',
+  'button',
+  '.input-group',
+  '.hero h1',
+  '.hero p',
+  '.account h4',
+  '.account-details p'
+];
+
+let activeTouchHoveredElements = new Set();
+
+function clearTouchHoverClasses() {
+  activeTouchHoveredElements.forEach((element) => element.classList.remove('touch-hover'));
+  activeTouchHoveredElements.clear();
+}
+
+function updateTouchHoverAtPoint(x, y) {
+  clearTouchHoverClasses();
+  const touchedElement = document.elementFromPoint(x, y);
+  if (!touchedElement) return;
+
+  let node = touchedElement;
+  while (node && node !== document.body && node !== document.documentElement) {
+    if (touchHoverSelectors.some((selector) => node.matches(selector))) {
+      node.classList.add('touch-hover');
+      activeTouchHoveredElements.add(node);
+    }
+    node = node.parentElement;
+  }
+}
+
+function setupTouchHover() {
+  document.addEventListener('touchstart', (event) => {
+    if (!event.touches.length) return;
+    updateTouchHoverAtPoint(event.touches[0].clientX, event.touches[0].clientY);
+  }, { passive: true });
+
+  document.addEventListener('touchmove', (event) => {
+    if (!event.touches.length) return;
+    updateTouchHoverAtPoint(event.touches[0].clientX, event.touches[0].clientY);
+  }, { passive: true });
+
+  document.addEventListener('touchend', clearTouchHoverClasses, { passive: true });
+  document.addEventListener('touchcancel', clearTouchHoverClasses, { passive: true });
+}
+
 // Función para actualizar idioma
 function updateLanguage() {
   const lang = localStorage.getItem('language') || 'es';
@@ -52,6 +109,7 @@ if (hamburgerBtn && mobileMenu && hamburgerIcon && closeIcon) {
 // Actualizar idioma al cargar
 document.addEventListener('DOMContentLoaded', () => {
   updateLanguage();
+  setupTouchHover();
 
   // Actualizar textos
   const navNameEl = document.getElementById('nav-name');
@@ -161,6 +219,21 @@ const albumData = {
       'imagenes/proyecto/WhatsApp Image 2026-05-04 at 7.22.21 PM (1).jpeg',
       'imagenes/proyecto/WhatsApp Image 2026-05-04 at 7.22.21 PM.jpeg'
     ]
+  },
+  'culto-damas': {
+    title: 'Culto de Damas',
+    description: 'En proceso.',
+    images: []
+  },
+  'culto-caballeros': {
+    title: 'Culto de Caballeros',
+    description: 'En proceso.',
+    images: []
+  },
+  'escuela-dominical': {
+    title: 'Escuela Dominical',
+    description: 'En proceso.',
+    images: []
   }
 };
 
@@ -178,16 +251,23 @@ function openAlbum(albumKey) {
   albumModalSubtitle.textContent = album.description;
   albumModalGrid.innerHTML = '';
 
-  album.images.forEach((src) => {
-    const item = document.createElement('div');
-    item.className = 'overflow-hidden rounded-3xl bg-slate-100';
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = `${album.title} imagen`;
-    img.className = 'w-full h-full object-cover';
-    item.appendChild(img);
-    albumModalGrid.appendChild(item);
-  });
+  if (!album.images || !album.images.length) {
+    const emptyMessage = document.createElement('div');
+    emptyMessage.className = 'rounded-3xl bg-slate-100 p-10 text-center text-gray-500';
+    emptyMessage.textContent = 'En proceso';
+    albumModalGrid.appendChild(emptyMessage);
+  } else {
+    album.images.forEach((src) => {
+      const item = document.createElement('div');
+      item.className = 'overflow-hidden rounded-3xl bg-slate-100';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `${album.title} imagen`;
+      img.className = 'w-full h-full object-cover';
+      item.appendChild(img);
+      albumModalGrid.appendChild(item);
+    });
+  }
 
   albumModal.classList.remove('hidden');
   document.body.style.overflow = 'hidden';

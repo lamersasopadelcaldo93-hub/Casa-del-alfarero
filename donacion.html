@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Donaciones</title>
 
+  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="donacion.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -168,7 +169,12 @@
 
       <p class="form-note">Envía tu mensaje directamente al correo de la iglesia. Ingresa tu nombre y tu correo para que podamos contactarte.</p>
 
-      <form id="contact-form" action="/api/send-donation" method="POST">
+      <form id="contact-form" action="https://formsubmit.co/ajax/leonardoyassercontrerasroa@gmail.com" method="POST">
+
+        <!-- FormSubmit: envío AJAX para mostrar solo el mensaje personalizado.
+             Reemplaza el correo si quieres usar otro. -->
+        <input type="hidden" name="_subject" value="Nuevo mensaje desde Donaciones">
+        <input type="hidden" name="_captcha" value="false">
 
         <div class="input-group">
           <label for="donor-name">Nombre completo</label>
@@ -229,6 +235,44 @@
           return;
         }
 
+        const action = form.getAttribute('action') || '';
+        const isFormSubmit = action.toLowerCase().includes('formsubmit.co');
+
+        if (isFormSubmit) {
+          const formData = new FormData();
+          formData.append('name', name);
+          formData.append('email', email);
+          formData.append('message', message);
+          formData.append('_subject', 'Nuevo mensaje desde Donaciones');
+          formData.append('_captcha', 'false');
+
+          try {
+            const response = await fetch(action, {
+              method: 'POST',
+              body: formData
+            });
+
+            const data = await response.json();
+            if (response.ok && data.success) {
+              statusMessage.textContent = 'Gracias, tu información fue enviada correctamente.';
+              statusMessage.style.color = '#166534';
+              form.reset();
+            } else {
+              const errorText = data.message || 'No se pudo enviar la información. Intenta de nuevo más tarde.';
+              throw new Error(errorText);
+            }
+          } catch (err) {
+            console.error('Error al enviar formulario:', err);
+            statusMessage.textContent = err && err.message ? err.message : 'Ocurrió un error al enviar la información. Intenta de nuevo.';
+            statusMessage.style.color = '#b91c1c';
+          } finally {
+            if (submitBtn) submitBtn.disabled = false;
+          }
+
+          return;
+        }
+
+        // Si no es FormSubmit, usamos fetch hacia nuestro endpoint (legacy / local)
         const payload = { name, email, message };
         const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
         const isFileUrl = window.location.protocol === 'file:';
@@ -246,14 +290,9 @@
             body: JSON.stringify(payload)
           });
 
-          // Leer primero como texto y luego intentar parsear JSON (evita 'body stream already read')
           const text = await response.text();
           let parsed = null;
-          try {
-            parsed = text ? JSON.parse(text) : null;
-          } catch (e) {
-            parsed = null;
-          }
+          try { parsed = text ? JSON.parse(text) : null; } catch (e) { parsed = null; }
 
           if (response.ok && parsed && parsed.success) {
             statusMessage.textContent = 'Gracias, tu información fue enviada correctamente.';

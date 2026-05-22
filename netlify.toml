@@ -1,0 +1,9 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/send-donation"
+  to = "/.netlify/functions/send-donation"
+  status = 200
+  force = true
