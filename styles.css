@@ -29,23 +29,14 @@ button {
   min-width: 0;
 }
 
-.touch-hover,
-.touch-hover h1,
-.touch-hover h2,
-.touch-hover h3,
-.touch-hover h4,
-.touch-hover p,
-.touch-hover span,
-.touch-hover label,
-.touch-hover button,
-.touch-hover strong,
-.touch-hover em,
-.touch-hover a,
-.touch-hover input,
-.touch-hover textarea {
+/* Efecto Celeste Universal e Independiente */
+a:hover, button:hover, h1:hover, h2:hover, h3:hover, h4:hover, p:hover, span:hover, i:hover, strong:hover, em:hover, label:hover,
+a.touch-hover, button.touch-hover, h1.touch-hover, h2.touch-hover, h3.touch-hover, h4.touch-hover, p.touch-hover, span.touch-hover, i.touch-hover, strong.touch-hover, em.touch-hover, label.touch-hover {
   color: #5ed3f3 !important;
+  transition: color 0.1s ease;
 }
 
+/* Resalte de Contenedores */
 .bank-card.touch-hover,
 .hero-item.touch-hover,
 .section-header.touch-hover,
@@ -366,13 +357,16 @@ body {
 
 .folder-card-button {
   all: unset;
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 100%;
   cursor: pointer;
+  vertical-align: top;
 }
 
 .folder-card-image {
+  display: block;
+  width: 100%;
   min-height: 320px;
   background-color: #dcd7ce;
   background-size: cover;
@@ -443,6 +437,12 @@ body {
   height: 220px;
   object-fit: cover;
   border-radius: 1rem;
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.album-modal-grid img:hover {
+  transform: scale(1.02);
 }
 
 .album-modal-grid {
@@ -781,4 +781,3 @@ footer {
     transform: translateX(4px);
   }
 }
-

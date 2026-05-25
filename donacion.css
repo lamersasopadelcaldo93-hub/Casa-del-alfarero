@@ -1,22 +1,22 @@
 /* Estilos específicos para la página de donaciones */
 
-.hero {
-  position: relative;
-  height: 100vh;
-  min-height: 700px;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
-  overflow: hidden;
+:root {
+  --accent-celeste: #5ed3f3;
 }
 
-/* Fondo cristalizado mejorado */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('../imagenes/fondos/fondo-contacto.jpg') center/cover no-repeat;
-  opacity: 0.15;
-  filter: blur(8px) brightness(0.7);
-  z-index: -2;
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 100px 0 60px; /* Espacio para el navbar y respiro abajo */
+  overflow: hidden;
+  z-index: 1; /* Crea un contexto de apilamiento para los hijos */
+  background: #1a1a2e; /* Color de respaldo */
+}
+
+.hero-slideshow {
+  z-index: 1 !important; /* Las fotos son la capa base */
 }
 
 .hero::after {
@@ -24,22 +24,24 @@
   position: absolute;
   inset: 0;
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  z-index: -1;
+  backdrop-filter: blur(2px); /* Reducido de 12px a 2px para mayor claridad */
+  z-index: 2; /* Encima de las fotos para el efecto cristal */
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.3); /* Ligeramente más claro para que los colores resalten */
+  z-index: 3; /* Oscurece un poco para que resalte el texto */
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  height: 100%;
+}
+
+.hero .container {
   display: flex;
   align-items: center;
 }
@@ -47,9 +49,10 @@
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: 3rem;
   align-items: center;
-  height: 100%;
+  position: relative;
+  z-index: 10; /* Asegura que el texto y botones estén siempre al frente */
 }
 
 .hero-left {
@@ -68,7 +71,7 @@
 }
 
 .hero-left h1 {
-  font-size: 2.5rem;
+  font-size: clamp(2.2rem, 5vw, 3.8rem); /* Tamaño fluido según la pantalla */
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -88,7 +91,7 @@
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 2rem;
-  max-width: 400px;
+  max-width: 550px;
 }
 
 .verse-box {
@@ -197,7 +200,12 @@
   margin: 0;
 }
 
-.payment-card, .form-card {
+.payment-card .section-header {
+  justify-content: center;
+}
+
+.payment-card,
+.form-card {
   background: white;
   border-radius: 20px;
   padding: 2.5rem;
@@ -206,11 +214,15 @@
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+/* ===== BANCOS ===== */
+
 .bank-grid {
   display: flex;
   gap: 2rem;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: stretch;
+  flex-wrap: nowrap; /* Fuerza que estén en horizontal en desktop */
+  width: 100%;
 }
 
 .bank-card {
@@ -220,7 +232,11 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   flex: 1;
   min-width: 280px;
-  max-width: 320px;
+  max-width: 420px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .bank-card:hover {
@@ -229,23 +245,42 @@
 }
 
 .bank-title {
-  padding: 1rem;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
 }
 
+.bank-logo {
+  max-width: 180px;
+  height: auto;
+  border-radius: 20px; /* Bordes más redondeados para el logo de Lafise */
+  background: white;
+  padding: 8px;
+  border: 1px solid #e5e7eb;
+}
 .bank-title img {
-  max-height: 40px;
+  max-height: 60px;
   width: auto;
 }
 
 .accounts {
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .account {
-  margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid #f0f0f0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
 }
 
 .account:last-child {
@@ -362,104 +397,183 @@
   color: #555;
 }
 
-.contact-actions-vertical {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-  margin-top: 1.5rem;
+/* ===== CONTACTO ===== */
+
+.contact-section {
+  text-align: center;
+  margin-top: 3rem;
 }
 
-.contact-actions-vertical .contact-link {
-  width: 100%;
-  max-width: 300px;
+.contact-section .section-header {
   justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.contact-note {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.contact-actions-vertical {
+  display: flex;
+  flex-direction: row; /* Horizontal en pantallas grandes */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
 .contact-link {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 12px;
+  justify-content: center;
+
+  
+
+  width: 180px;
+  height: 160px;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 18px;
+  background: white;
+  border: 1px solid #e5e7eb; /* Borde sutil para resaltar el icono */
+
   text-decoration: none;
+  color: #1a1a2e;
   font-weight: 600;
+
   transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.contact-link img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.contact-link span {
+  font-size: 1rem;
+}
+
+.contact-link span {
+  font-size: 1rem;
 }
 
 .contact-link.whatsapp {
-  background: linear-gradient(135deg, #25D366, #128C7E);
-  color: white;
+  border-bottom: 4px solid #25D366; /* Línea de color de marca en la base */
 }
 
 .contact-link.whatsapp:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+  border-color: #25D366;
+  box-shadow: 0 15px 30px rgba(37, 211, 102, 0.15);
 }
 
 .contact-link.email {
-  background: linear-gradient(135deg, #EA4335, #D93025);
-  color: white;
+  border-bottom: 4px solid #EA4335; /* Línea de color de marca en la base */
 }
 
 .contact-link.email:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(234, 67, 53, 0.4);
+  border-color: #EA4335;
+  box-shadow: 0 15px 30px rgba(234, 67, 53, 0.15);
 }
 
 /* Responsivesive */
+
 @media (max-width: 992px) {
+  .bank-grid {
+    flex-wrap: wrap; /* Empiezan a apilarse en tablets */
+    gap: 2rem;
+  }
+
+  .hero {
+    padding-top: 120px;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
-    text-align: center;
+    gap: 4rem;
   }
-  
+
   .hero-left {
     text-align: center;
-    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  
+
   .top-label {
     justify-content: center;
   }
-  
+
   .hero-left h1 {
-    text-align: center;
-  }
-  
-  .hero-left p {
-    text-align: center;
     margin-left: auto;
     margin-right: auto;
   }
-  
+
+  .hero-left p {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
+  }
+
   .verse-box {
     justify-content: center;
+    max-width: 600px;
   }
-  
+
   .hero-right {
     justify-content: center;
   }
-  
-  .bank-grid {
-    grid-template-columns: 1fr;
-  }
+
 }
 
 @media (max-width: 576px) {
-  .hero-left h1 {
-    font-size: 2rem;
-  }
-  
-  .payment-card, .form-card {
+  .payment-card,
+  .form-card {
     padding: 1.5rem;
   }
-  
+
+  .contact-actions-vertical {
+    flex-direction: column; /* Se ponen uno arriba del otro en celulares */
+    width: 100%;
+  }
+
+  .verse-box {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.8rem;
+    padding: 1.25rem;
+  }
+
   .section-header h2 {
     font-size: 1.5rem;
   }
-  
+
   .hero-card {
     padding: 1.5rem;
+  }
+
+  .bank-grid {
+    flex-wrap: wrap; /* En móviles sí permitimos que se pongan uno abajo del otro */
+  }
+
+  .bank-card {
+    width: 100%; /* Ocupan todo el ancho (forma de fila/horizontal) */
+    max-width: 100%;
+  }
+
+  .contact-link {
+    width: 100%; /* Botones anchos apilados uno arriba del otro */
+    height: auto;
+    flex-direction: row; /* Icono al lado del texto dentro del botón ancho */
+    justify-content: flex-start;
+    padding: 1rem 2rem;
   }
 }

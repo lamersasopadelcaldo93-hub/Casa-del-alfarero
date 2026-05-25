@@ -1,4 +1,4 @@
-﻿/* Estilos de ubicación con la misma paleta y propiedades de la página principal */
+﻿﻿/* Estilos de ubicación con la misma paleta y propiedades de la página principal */
 
 html, body {
   height: 100%;
@@ -251,20 +251,14 @@ body {
 a:hover,
 button:hover,
 .nav-links:hover,
-h1:hover,
-h2:hover,
-h3:hover,
-h4:hover,
-h5:hover,
-h6:hover,
-p:hover,
-span:hover,
-label:hover,
-strong:hover,
-em:hover,
 .logo-img:hover,
 .nav-icon:hover,
 .hero-button:hover {
+  color: var(--accent-celeste) !important;
+}
+
+/* Sincronización con el sistema táctil global */
+a.touch-hover, button.touch-hover, h1.touch-hover, h2.touch-hover, h3.touch-hover, h4.touch-hover, p.touch-hover, span.touch-hover, label.touch-hover {
   color: var(--accent-celeste) !important;
 }
 

@@ -10,25 +10,12 @@ const config = {
 
 // Efecto hover táctil en móviles: resalta mientras deslizas el dedo
 const touchHoverSelectors = [
-  '.bank-card',
-  '.hero-item',
-  '.section-header',
-  '.account',
-  '.form-card',
-  '.payment-card',
-  '.verse-box',
-  '.bank-title',
-  '.top-label',
-  'a',
-  'button',
-  '.input-group',
-  '.hero h1',
-  '.hero p',
-  '.account h4',
-  '.account-details p'
+  'a', 'button', 'h1', 'h2', 'h3', 'h4', 'p', 'span', 'i', 'strong', 'em', 'label',
+  '.bank-card', '.hero-item', '.verse-box', '.contact-link', '.folder-card', '.payment-card'
 ];
 
 let activeTouchHoveredElements = new Set();
+let isUpdatingTouch = false;
 
 function clearTouchHoverClasses() {
   activeTouchHoveredElements.forEach((element) => element.classList.remove('touch-hover'));
@@ -36,18 +23,27 @@ function clearTouchHoverClasses() {
 }
 
 function updateTouchHoverAtPoint(x, y) {
-  clearTouchHoverClasses();
-  const touchedElement = document.elementFromPoint(x, y);
-  if (!touchedElement) return;
+  if (isUpdatingTouch) return;
+  isUpdatingTouch = true;
 
-  let node = touchedElement;
-  while (node && node !== document.body && node !== document.documentElement) {
-    if (touchHoverSelectors.some((selector) => node.matches(selector))) {
-      node.classList.add('touch-hover');
-      activeTouchHoveredElements.add(node);
+  requestAnimationFrame(() => {
+    clearTouchHoverClasses();
+    const touchedElement = document.elementFromPoint(x, y);
+    if (!touchedElement) {
+      isUpdatingTouch = false;
+      return;
     }
-    node = node.parentElement;
-  }
+
+    let node = touchedElement;
+    while (node && node !== document.body && node !== document.documentElement) {
+      if (touchHoverSelectors.some((selector) => node.matches(selector))) {
+        node.classList.add('touch-hover');
+        activeTouchHoveredElements.add(node);
+      }
+      node = node.parentElement;
+    }
+    isUpdatingTouch = false;
+  });
 }
 
 function setupTouchHover() {
@@ -177,7 +173,16 @@ const albumData = {
       'imagenes/Misiones/WhatsApp Image 2026-05-04 at 7.27.53 PM (1).jpeg',
       'imagenes/Misiones/WhatsApp Image 2026-05-04 at 7.27.53 PM (2).jpeg',
       'imagenes/Misiones/WhatsApp Image 2026-05-04 at 7.27.53 PM (3).jpeg',
-      'imagenes/Misiones/WhatsApp Image 2026-05-04 at 7.27.54 PM.jpeg'
+      'imagenes/Misiones/WhatsApp Image 2026-05-04 at 7.27.54 PM.jpeg',
+      'imagenes/Misiones/WhatsApp Image 2026-05-22 at 10.16.32 AM (1).jpeg',
+      'imagenes/Misiones/WhatsApp Image 2026-05-22 at 10.16.32 AM (2).jpeg',
+      'imagenes/Misiones/WhatsApp Image 2026-05-22 at 10.16.32 AM.jpeg',
+      'imagenes/Misiones/WhatsApp Image 2026-05-22 at 10.16.33 AM (1).jpeg',
+      'imagenes/Misiones/WhatsApp Image 2026-05-22 at 10.16.33 AM (2).jpeg',
+      'imagenes/Misiones/WhatsApp Image 2026-05-22 at 10.16.33 AM.jpeg'
+       
+      // Agrega aquí las nuevas imágenes de Misiones siguiendo el formato:
+      // 'imagenes/Misiones/Nombre del nuevo archivo.jpeg',
     ]
   },
   jovenes: {
@@ -220,20 +225,49 @@ const albumData = {
       'imagenes/proyecto/WhatsApp Image 2026-05-04 at 7.22.21 PM.jpeg'
     ]
   },
-  'culto-damas': {
-    title: 'Culto de Damas',
-    description: 'En proceso.',
-    images: []
+  'congreso-damas': {
+    title: 'Congreso Damas',
+    description: 'Galería de fotos del Congreso de Damas: momentos de fe y compañerismo.',
+    images: [
+      'imagenes/congresodamas/WhatsApp Image 2026-05-22 at 9.22.54 AM.jpeg',
+      'imagenes/congresodamas/WhatsApp Image 2026-05-22 at 9.22.55 AM.jpeg',
+      'imagenes/congresodamas/WhatsApp Image 2026-05-22 at 9.22.56 AM (1).jpeg',
+      'imagenes/congresodamas/WhatsApp Image 2026-05-22 at 9.22.56 AM (2).jpeg',
+      'imagenes/congresodamas/WhatsApp Image 2026-05-22 at 9.22.56 AM.jpeg',
+      'imagenes/congresodamas/WhatsApp Image 2026-05-22 at 9.26.51 AM (1).jpeg',
+      'imagenes/congresodamas/WhatsApp Image 2026-05-22 at 9.26.51 AM.jpeg',
+      'imagenes/congresodamas/WhatsApp Image 2026-05-22 at 9.26.52 AM (1).jpeg',
+      'imagenes/congresodamas/WhatsApp Image 2026-05-22 at 9.26.53 AM (1).jpeg',
+      'imagenes/congresodamas/WhatsApp Image 2026-05-22 at 9.26.53 AM.jpeg',
+      'imagenes/congresodamas/WhatsApp Image 2026-05-22 at 9.26.53 AM (3).jpeg',
+      'imagenes/congresodamas/WhatsApp Image 2026-05-22 at 9.26.53 AM (2).jpeg'
+      // Pega aquí el resto de imágenes de la carpeta 'congreso damas'
+    ]
   },
-  'culto-caballeros': {
-    title: 'Culto de Caballeros',
-    description: 'En proceso.',
-    images: []
+  'congreso-matrimonios': {
+    title: 'Congreso Matrimonios',
+    description: 'Recuerdos de nuestro encuentro para matrimonios y familias.',
+    images: [
+      'imagenes/congresomatrimonios/WhatsApp Image 2026-05-22 at 9.00.16 AM (1).jpeg',
+      'imagenes/congresomatrimonios/WhatsApp Image 2026-05-22 at 9.00.16 AM (2).jpeg',
+      'imagenes/congresomatrimonios/WhatsApp Image 2026-05-22 at 9.00.16 AM.jpeg',
+      'imagenes/congresomatrimonios/WhatsApp Image 2026-05-22 at 9.00.17 AM.jpeg',
+      'imagenes/congresomatrimonios/WhatsApp Image 2026-05-22 at 9.15.30 AM (1).jpeg',
+      'imagenes/congresomatrimonios/WhatsApp Image 2026-05-22 at 9.15.30 AM.jpeg',
+      'imagenes/congresomatrimonios/WhatsApp Image 2026-05-22 at 9.15.31 AM.jpeg'
+      // Pega aquí el resto de imágenes de la carpeta 'congreso matriminios'
+    ]
   },
-  'escuela-dominical': {
-    title: 'Escuela Dominical',
-    description: 'En proceso.',
-    images: []
+  'campo': {
+    title: 'Campo',
+    description: 'Imágenes de nuestras salidas y actividades recreativas al aire libre.',
+    images: [
+      'imagenes/campo/WhatsApp Image 2026-05-24 at 4.11.17 PM (1).jpeg',
+      'imagenes/campo/WhatsApp Image 2026-05-24 at 4.11.17 PM (2).jpeg',
+      'imagenes/campo/WhatsApp Image 2026-05-24 at 4.11.17 PM.jpeg',
+      'imagenes/campo/WhatsApp Image 2026-05-24 at 4.11.18 PM.jpeg'
+      // Pega aquí el resto de imágenes de la carpeta 'campo'
+    ]
   }
 };
 
@@ -242,6 +276,9 @@ const albumModalTitle = document.getElementById('albumModalTitle');
 const albumModalSubtitle = document.getElementById('albumModalSubtitle');
 const albumModalGrid = document.getElementById('albumModalGrid');
 const albumModalClose = document.getElementById('albumModalClose');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
 
 function openAlbum(albumKey) {
   const album = albumData[albumKey];
@@ -264,6 +301,7 @@ function openAlbum(albumKey) {
       img.src = src;
       img.alt = `${album.title} imagen`;
       img.className = 'w-full h-full object-cover';
+      img.onclick = () => openLightbox(src);
       item.appendChild(img);
       albumModalGrid.appendChild(item);
     });
@@ -279,6 +317,22 @@ function closeAlbum() {
   document.body.style.overflow = '';
 }
 
+function openLightbox(src) {
+  if (!lightbox || !lightboxImg) return;
+  lightboxImg.src = src;
+  lightbox.classList.remove('hidden');
+  lightbox.classList.add('flex');
+}
+
+function closeLightbox() {
+  if (!lightbox) return;
+  lightbox.classList.add('hidden');
+  lightbox.classList.remove('flex');
+}
+
+if (lightbox) lightbox.addEventListener('click', closeLightbox);
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+
 if (albumModalClose) albumModalClose.addEventListener('click', closeAlbum);
 if (albumModal) albumModal.addEventListener('click', (event) => {
   if (event.target === albumModal) closeAlbum();
@@ -287,6 +341,9 @@ if (albumModal) albumModal.addEventListener('click', (event) => {
 window.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && albumModal && !albumModal.classList.contains('hidden')) {
     closeAlbum();
+  }
+  if (event.key === 'Escape' && lightbox && !lightbox.classList.contains('hidden')) {
+    closeLightbox();
   }
 });
 
