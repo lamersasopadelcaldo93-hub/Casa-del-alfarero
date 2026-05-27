@@ -107,6 +107,23 @@ document.addEventListener('DOMContentLoaded', () => {
   updateLanguage();
   setupTouchHover();
 
+  // Selector de idiomas (escritorio)
+  const languageBtn = document.getElementById('language-btn');
+  const languageMenu = document.getElementById('language-menu');
+
+  if (languageBtn && languageMenu) {
+    languageBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      languageMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!languageMenu.classList.contains('hidden') && !languageBtn.contains(e.target) && !languageMenu.contains(e.target)) {
+        languageMenu.classList.add('hidden');
+      }
+    });
+  }
+
   // Actualizar textos
   const navNameEl = document.getElementById('nav-name');
   if (navNameEl) navNameEl.textContent = config.church_name;

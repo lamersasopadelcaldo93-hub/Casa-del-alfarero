@@ -3,7 +3,15 @@
  <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Donaciones</title>
+   <title>Donaciones | Casa del Alfarero</title>
+   <meta name="description" content="Apoya la misión de la Iglesia Casa del Alfarero. Tu donación nos ayuda a seguir compartiendo el amor de Dios y llevando esperanza a más personas.">
+   <link rel="canonical" href="https://tudominio.com/donacion.html" />
+   
+   <meta property="og:title" content="Donaciones | Casa del Alfarero">
+   <meta property="og:description" content="Tu apoyo hace la diferencia. Sé parte de nuestra misión con tu donación.">
+   <meta property="og:url" content="https://tudominio.com/donacion.html">
+   <meta property="og:image" content="https://tudominio.com/imagenes/logo.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="donacion.css">
@@ -161,15 +169,10 @@
         <h2>Contacto</h2>
       </div>
 
-      <p class="contact-note">Escríbenos por WhatsApp o correo.</p>
+      <p class="contact-note">Escríbenos por correo electrónico.</p>
 
       <div class="contact-actions-vertical">
-        <a class="contact-link whatsapp" href="https://wa.me/50512345678?text=Hola%20Casa%20del%20Alfarero,%20tengo%20una%20consulta" target="_blank" rel="noopener noreferrer" aria-label="Enviar mensaje por WhatsApp">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="48" height="48">
-          <span>WhatsApp</span>
-        </a>
-
-        <a class="contact-link email" href="mailto:info@casadelalfarero.org?subject=Contacto%20desde%20web" aria-label="Enviar correo electrónico">
+        <a class="contact-link email" href="mailto:casadelalfareroaec@gmail.com?subject=Consulta%20Casa%20del%20Alfarero" aria-label="Enviar correo electrónico">
           <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" width="48" height="48">
           <span>Correo</span>
         </a>
@@ -190,12 +193,12 @@
       <a href="proyectos.html" class="hover:text-yellow-400 transition-colors">Proyectos</a>
       <a href="ubicacio.html" class="hover:text-yellow-400 transition-colors">Ubicación</a>
       <a href="donacion.html" class="hover:text-yellow-400 transition-colors">Donaciones</a>
-      <div class="relative group">
+      <div class="relative">
         <button id="language-btn" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition-colors text-sm font-semibold" title="Cambiar idioma">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
           <span id="current-language">ES</span>
         </button>
-        <div class="absolute right-0 mt-2 w-24 bg-white rounded-lg shadow-lg hidden group-hover:block z-50">
+        <div id="language-menu" class="absolute right-0 mt-2 w-24 bg-white rounded-lg shadow-lg hidden z-50">
           <button onclick="changeLanguage('es')" class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">Español</button>
           <button onclick="changeLanguage('en')" class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">English</button>
           <button onclick="changeLanguage('fr')" class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">Français</button>
