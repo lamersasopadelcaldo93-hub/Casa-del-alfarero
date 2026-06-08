@@ -65,79 +65,47 @@
    </div>
   </nav>
 
-  <main class="pt-32 pb-20">
+  <main class="pt-24 pb-12">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-12 animate-fade-up">
+      <div class="text-center mb-8 animate-fade-up">
         <h1 class="font-heading text-5xl font-bold mb-4 text-[#1a1a2e]" data-translate="bible_title">La Santa Biblia</h1>
         <p class="text-gray-600 italic text-lg" data-translate="bible_desc">Lámpara es a mis pies tu palabra, y lumbrera a mi camino.</p>
         <div class="gold-line mx-auto mt-6"></div>
       </div>
 
       <div class="grid lg:grid-cols-12 gap-8 items-start">
-        <!-- Panel de Búsqueda y Resultados (Izquierda) -->
-        <div class="lg:col-span-5 space-y-6">
-          <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-yellow-600/10">
-            <h3 class="font-heading text-xl font-bold mb-4 text-[#1a1a2e]">Buscar Versículo</h3>
-            <div class="flex flex-col gap-3">
-              <input id="bible-search-input" type="text" placeholder="Ej: Juan 3:16 o Salmos 23" class="w-full px-5 py-3 rounded-xl border-2 border-gray-100 focus:border-yellow-500 outline-none transition-all">
-              <button onclick="searchBibleVerse()" class="w-full py-3 bg-[#1a1a2e] text-white rounded-xl font-bold hover:bg-black transition-all flex items-center justify-center gap-2">
-                <i data-lucide="search" class="w-4 h-4"></i> Buscar
-              </button>
-            </div>
-            <div id="version-comparer" class="mt-6 hidden">
-              <p class="text-xs font-bold text-gray-400 uppercase mb-3">Comparar versiones externas:</p>
-              <div class="flex flex-wrap gap-2">
-                <button onclick="openExternalBible('RVR1960')" class="px-3 py-1.5 bg-yellow-600/10 text-yellow-700 text-[10px] font-black rounded-lg border border-yellow-600/20 hover:bg-yellow-600/20 transition-all uppercase">RVR1960</button>
-                <button onclick="openExternalBible('NVI')" class="px-3 py-1.5 bg-blue-600/10 text-blue-700 text-[10px] font-black rounded-lg border border-blue-600/20 hover:bg-blue-600/20 transition-all uppercase">NVI</button>
-                <button onclick="openExternalBible('TLA')" class="px-3 py-1.5 bg-green-600/10 text-green-700 text-[10px] font-black rounded-lg border border-green-600/20 hover:bg-green-600/20 transition-all uppercase">TLA</button>
-              </div>
-            </div>
-          </div>
-
-          <div id="search-results-container" class="space-y-4">
-            <!-- Resultados de texto para el editor -->
-            <div id="search-results" class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-yellow-600/10 min-h-[120px] flex flex-col justify-center text-center">
-              <p class="text-gray-400 italic">Los resultados aparecerán aquí...</p>
-            </div>
-            
-            <!-- Visualizador Interno de BibleGateway -->
-            <div id="bible-web-view" class="hidden bg-white p-4 rounded-[2.5rem] shadow-xl border border-yellow-600/10 overflow-hidden flex flex-col">
-              <div class="flex justify-between items-center mb-3 px-2">
-                <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Consulta en BibleGateway</span>
-                <a id="bg-external-link" href="#" target="_blank" class="text-yellow-600 hover:text-yellow-700 text-[10px] font-bold flex items-center gap-1 transition-colors"><i data-lucide="external-link" class="w-3 h-3"></i> Pantalla completa</a>
-              </div>
-              <iframe id="bible-external-iframe" src="" class="w-full h-[450px] border-none rounded-2xl bg-gray-50" title="Vista Web de la Biblia"></iframe>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel de Constructor de Prédica (Derecha) -->
-        <div class="lg:col-span-7">
-          <div class="bg-white p-10 rounded-[3rem] shadow-2xl border border-yellow-600/10 min-h-[700px] flex flex-col">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 border-b border-gray-100 pb-6">
-              <div class="flex-1 w-full">
-                <input id="sermon-title" type="text" placeholder="Título de la Prédica o Enseñanza" class="w-full text-2xl font-heading font-bold text-[#1a1a2e] bg-transparent border-none focus:outline-none placeholder:text-gray-300">
-              </div>
-              <div class="flex flex-wrap gap-3 shrink-0">
-                <button onclick="exportToWord()" class="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all shadow-lg font-black text-[10px] uppercase tracking-widest" title="Exportar a Word">
-                  <i data-lucide="file-text" class="w-4 h-4"></i>
-                  <span>Word</span>
-                </button>
-                <button onclick="exportToPDF()" class="flex items-center gap-2 px-5 py-2.5 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all shadow-lg font-black text-[10px] uppercase tracking-widest" title="Exportar a PDF">
-                  <i data-lucide="file-down" class="w-4 h-4"></i>
-                  <span>PDF</span>
+        <div class="lg:col-span-12">
+          <div class="flex flex-col lg:flex-row gap-6 items-stretch">
+            <div class="bg-white p-6 rounded-[2.5rem] shadow-xl border border-yellow-600/10 w-full lg:w-1/3">
+              <h3 class="font-heading text-xl font-bold mb-4 text-[#1a1a2e]">Buscar Versículo</h3>
+              <div class="flex flex-col gap-3">
+                <input id="bible-search-input" type="text" placeholder="Ej: Juan 3:16 o Salmos 23" class="w-full px-5 py-3 rounded-xl border-2 border-gray-100 focus:border-yellow-500 outline-none transition-all">
+                <button onclick="searchBibleVerse()" class="w-full py-3 bg-[#1a1a2e] text-white rounded-xl font-bold hover:bg-black transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="search" class="w-4 h-4"></i> Buscar
                 </button>
               </div>
+              <div id="version-comparer" class="mt-6 hidden">
+                <p class="text-xs font-bold text-gray-400 uppercase mb-3">Comparar versiones externas:</p>
+                <div class="flex flex-wrap gap-2">
+                  <button onclick="openExternalBible('RVR1960')" class="px-3 py-1.5 bg-yellow-600/10 text-yellow-700 text-[10px] font-black rounded-lg border border-yellow-600/20 hover:bg-yellow-600/20 transition-all uppercase">RVR1960</button>
+                  <button onclick="openExternalBible('NVI')" class="px-3 py-1.5 bg-blue-600/10 text-blue-700 text-[10px] font-black rounded-lg border border-blue-600/20 hover:bg-blue-600/20 transition-all uppercase">NVI</button>
+                  <button onclick="openExternalBible('TLA')" class="px-3 py-1.5 bg-green-600/10 text-green-700 text-[10px] font-black rounded-lg border border-green-600/20 hover:bg-green-600/20 transition-all uppercase">TLA</button>
+                </div>
+              </div>
             </div>
 
-            <!-- Área Editable -->
-            <div id="sermon-editor" contenteditable="true" class="flex-1 outline-none text-gray-700 leading-relaxed space-y-4 prose max-w-none min-h-[500px]" data-placeholder="Comienza a redactar tu enseñanza aquí o añade versículos desde el buscador...">
-              <p>Haz clic aquí para empezar a escribir...</p>
-            </div>
+              <div id="results-area" class="flex-1 space-y-4 w-full lg:w-2/3">
+              <div id="search-results" class="bg-white p-6 rounded-[2.5rem] shadow-xl border border-yellow-600/10 min-h-[80px] flex flex-col justify-center text-center">
+                <p class="text-gray-400 italic">Los resultados aparecerán aquí...</p>
+              </div>
 
-            <div class="mt-8 pt-6 border-t border-gray-50 flex items-center justify-between text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-              <span>Casa del Alfarero — Herramienta de Estudio</span>
-              <button onclick="document.getElementById('sermon-editor').innerHTML = ''" class="text-red-400 hover:text-red-600">Limpiar todo</button>
+              <div id="bible-web-view" class="hidden bg-white p-4 rounded-[2.5rem] shadow-xl border border-yellow-600/10 overflow-hidden flex flex-col">
+                <div class="flex justify-between items-center mb-3 px-2">
+                  <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Consulta en BibleGateway</span>
+                  <a id="bg-external-link" href="#" target="_blank" class="text-yellow-600 hover:text-yellow-700 text-[10px] font-bold flex items-center gap-1 transition-colors"><i data-lucide="external-link" class="w-3 h-3"></i> Pantalla completa</a>
+                </div>
+                <iframe id="bible-external-iframe" src="" class="w-full h-[320px] border-none rounded-2xl bg-gray-50" title="Vista Web de la Biblia"></iframe>
+              </div>
             </div>
           </div>
         </div>
@@ -145,12 +113,7 @@
     </div>
   </main>
 
-  <style>
-    #sermon-editor[contenteditable]:empty:before {
-      content: attr(data-placeholder);
-      color: #cbd5e1;
-    }
-  </style>
+  
 
   <footer class="w-full py-10 px-6 text-center">
     <p class="text-xs footer-gray" data-translate="footer_copyright">© 2026 Casa del Alfarero. Todos los derechos reservados.</p>

@@ -81,6 +81,72 @@ app.post('/api/send-donation', async (req, res) => {
   }
 });
 
+// Endpoint para búsqueda segura en YouTube con filtro de duración (usa YT_API_KEY desde variables de entorno)
+app.get('/api/yt-search', async (req, res) => {
+  try {
+    const q = req.query.q || '';
+    const apiKey = process.env.YT_API_KEY;
+    if (!apiKey) return res.status(500).json({ success: false, error: 'YT_API_KEY no configurada en el servidor.' });
+
+    const maxResults = Math.min(50, parseInt(req.query.max || '50', 10)); // Buscar más para filtrar después
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=${maxResults}&q=${encodeURIComponent(q)}&key=${apiKey}`;
+
+    const fetchFn = (typeof fetch === 'function') ? fetch : (await import('node-fetch')).default;
+    const response = await fetchFn(url);
+    if (!response.ok) {
+      const text = await response.text().catch(() => '');
+      return res.status(502).json({ success: false, error: 'YouTube API error', detail: text });
+    }
+
+    const data = await response.json();
+    const videoIds = (data.items || []).map(item => item.id.videoId).filter(Boolean);
+    
+    if (!videoIds.length) {
+      return res.json({ success: true, videos: [] });
+    }
+
+    // Obtener duraciones de los videos (máximo 50 por request)
+    const videosUrl = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet&id=${videoIds.join(',')}&key=${apiKey}`;
+    const videosResp = await fetchFn(videosUrl);
+    if (!videosResp.ok) {
+      const text = await videosResp.text().catch(() => '');
+      return res.status(502).json({ success: false, error: 'YouTube API videos error', detail: text });
+    }
+
+    const videosData = await videosResp.json();
+    
+    // Convertir duración ISO 8601 a segundos (PT10M30S -> 630 segundos)
+    function parseDuration(duration) {
+      const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+      const hours = parseInt(match[1]) || 0;
+      const minutes = parseInt(match[2]) || 0;
+      const seconds = parseInt(match[3]) || 0;
+      return hours * 3600 + minutes * 60 + seconds;
+    }
+
+    // Filtrar videos <= 10 minutos (600 segundos)
+    const MAX_DURATION_SECONDS = 600;
+    const videos = (videosData.items || [])
+      .filter(item => {
+        const durationSec = parseDuration(item.contentDetails.duration);
+        return durationSec <= MAX_DURATION_SECONDS;
+      })
+      .slice(0, 6) // Devolver los primeros 6 después de filtrar
+      .map(item => ({
+        id: item.id,
+        title: item.snippet.title,
+        channelTitle: item.snippet.channelTitle,
+        thumbnail: item.snippet.thumbnails?.high?.url || item.snippet.thumbnails?.default?.url || null,
+        duration: item.contentDetails.duration
+      }));
+
+    return res.json({ success: true, videos });
+  } catch (err) {
+    console.error('YT search error:', err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

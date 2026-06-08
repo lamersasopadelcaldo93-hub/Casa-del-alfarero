@@ -67,28 +67,39 @@ function setupDailyMusic() {
   const musicIframe = document.getElementById('daily-video-iframe');
   if (!musicIframe) return;
 
-  // Lista curada de música cristiana de YouTube - Videos verificados y disponibles
-  const dailyVideos = [
-    'fT_eIuYhD2U', // No Hay Lugar Más Alto - Miel San Marcos (Versión Live compatible)
-    'pYvNid8A7s0', // Te Doy Gloria - En Espíritu y en Verdad
-    '40W59Z5Lndc', // Como Dijiste - Christine D'Clario
-    '7pL6v_9B0rA', // Hermoso Nombre - Hillsong
-    'P5S5_Y0L08s', // Way Maker - Sinach
-    'sOny9N6uOsw', // Hosanna - Marco Barrientos
-    'X_m8R6p89c4'  // Creo en Ti - Julio Melgar
+  // Lista de 13 videos que rota cada 24 horas
+  const dailyVideoUrls = [
+    'https://youtu.be/iOCCVPepUb8?list=RDiOCCVPepUb8',
+    'https://youtu.be/oBEfGAncGMw?list=RDoBEfGAncGMw',
+    'https://youtu.be/4cHCCwZAzFQ?list=RD4cHCCwZAzFQ',
+    'https://youtu.be/whB-i-WzaT4?list=RDwhB-i-WzaT4',
+    'https://youtu.be/8fbVpCJw4Uk?list=RD8fbVpCJw4Uk',
+    'https://youtu.be/NNaPxaoWxXY?list=RDNNaPxaoWxXY',
+    'https://youtu.be/62s5KwvzSu4?list=RD62s5KwvzSu4',
+    'https://youtu.be/RElljP4oWgk?list=RDRElljP4oWgk',
+    'https://youtu.be/HjHJECAcb6U?list=RDHjHJECAcb6U',
+    'https://youtu.be/lfkUcWjFmmw?list=RDlfkUcWjFmmw',
+    'https://youtu.be/_fv911yDsIs?list=RD_fv911yDsIs',
+    'https://youtu.be/HNQ2GNoS7oQ?list=RDHNQ2GNoS7oQ',
+    'https://youtu.be/AFz-n95cW54?list=RDAFz-n95cW54'
   ];
 
-  // Lógica para cambiar el video automáticamente cada 24 horas basado en la fecha actual
-  const dayTimestamp = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
-  const videoIndex = Math.abs(dayTimestamp % dailyVideos.length);
-  const selectedVideoId = dailyVideos[videoIndex];
+  // Calcular índice basado en días transcurridos desde epoch
+  const dayTimestamp = Math.floor(Date.now() / (1000 * 60 * 60 * 24)); // Días desde 1 Enero 1970
+  const videoIndex = dayTimestamp % dailyVideoUrls.length;
+  const selectedVideoUrl = dailyVideoUrls[videoIndex];
+  const urlParams = new URLSearchParams(new URL(selectedVideoUrl).search);
+  const selectedVideoId = new URL(selectedVideoUrl).pathname.split('/').pop();
 
-  // URL optimizada para evitar el error de "Video no disponible"
-  const finalUrl = `https://www.youtube.com/embed/${selectedVideoId}?autoplay=1&mute=1&rel=0`;
-  if (musicIframe.src !== finalUrl) musicIframe.src = finalUrl;
+  // URL embebible con parámetros para autoplay y recomendaciones
+  const finalUrl = `https://www.youtube.com/embed/${selectedVideoId}?autoplay=1&mute=1&modestbranding=1`;
+  if (musicIframe.src !== finalUrl) {
+    musicIframe.src = finalUrl;
+  }
 }
 
-// --- Lógica de la Biblia y Constructor de Prédicas ---
+
+// --- Lógica de la Biblia ---
 
 async function searchBibleVerse() {
   const input = document.getElementById('bible-search-input');
@@ -154,14 +165,10 @@ async function searchBibleVerse() {
     const reference = data.reference;
     
     let versesHtml = `
-      <div class="text-left animate-fade-up">
-        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Extraído para tu prédica:</p>
-        <div class="mb-4 p-4 bg-gray-50 rounded-2xl border-l-4 border-yellow-500 group/verse hover:bg-yellow-50 transition-all">
-          <h4 class="font-bold text-[#1a1a2e] text-sm mb-1">${reference}</h4>
-          <p class="text-gray-700 italic text-sm mb-3">"${textClean}"</p>
-          <button onclick="addVerseToSermon('${reference}', '${textClean.replace(/'/g, "\\'")}')" class="w-full py-2 bg-white text-yellow-700 border border-yellow-200 rounded-xl text-[10px] font-black uppercase hover:bg-yellow-500 hover:text-white transition-all shadow-sm">
-            Añadir a la prédica
-          </button>
+      <div class="text-left animate-fade-up w-full">
+        <div class="p-8 bg-white rounded-3xl border-l-8 border-yellow-500 shadow-xl flex flex-col md:flex-row md:items-start gap-8">
+          <h4 class="font-black text-[#1a1a2e] text-3xl tracking-tight whitespace-nowrap md:min-w-[250px]">${reference}</h4>
+          <p class="text-gray-800 text-2xl leading-relaxed font-medium italic">"${textClean}"</p>
         </div>
       </div>`;
     
@@ -174,47 +181,12 @@ async function searchBibleVerse() {
   }
 }
 
-function addVerseToSermon(ref, text) {
-  const editor = document.getElementById('sermon-editor');
-  const verseHtml = `
-    <div class="my-4 p-4 bg-gray-50 border-l-4 border-yellow-500 rounded-r-xl" contenteditable="false">
-      <p class="font-bold text-[#1a1a2e] mb-1">${ref}</p>
-      <p class="italic text-gray-600">"${text}"</p>
-    </div>
-    <p><br></p>
-  `;
-  editor.innerHTML += verseHtml;
-  editor.focus();
-}
-
 function openExternalBible(version) {
   const input = document.getElementById('bible-search-input').value;
   if (!input) return;
   const baseUrl = "https://www.biblegateway.com/passage/?search=";
   window.open(`${baseUrl}${encodeURIComponent(input)}&version=${version}`, '_blank', 'width=800,height=600');
 }
-
-function exportToWord() {
-  const title = document.getElementById('sermon-title').value || 'Sin_Titulo';
-  const content = document.getElementById('sermon-editor').innerHTML;
-  const preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Prédica</title></head><body><h1 style='font-family:serif; color:#1a1a2e;'>" + title + "</h1>";
-  const postHtml = "</body></html>";
-  const html = preHtml + content + postHtml;
-  
-  const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = `${title.replace(/\s+/g, '_')}.doc`;
-  link.click();
-}
-
-function exportToPDF() {
-  const element = document.getElementById('sermon-editor').parentElement;
-  const opt = { margin: 1, filename: (document.getElementById('sermon-title').value || 'Predica') + '.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } };
-  html2pdf().set(opt).from(element).save();
-}
-
 // Función para actualizar idioma
 function updateLanguage() {
   const lang = localStorage.getItem('language') || 'es';
