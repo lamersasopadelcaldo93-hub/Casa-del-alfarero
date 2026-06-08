@@ -13,55 +13,53 @@
 </head>
 <body class="h-full font-body overflow-auto bg-[#1a1a2e]">
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-     <img src="imagenes/logo.png" class="logo-img" alt="Casa del Alfarero" />
-     <span id="nav-name" class="font-heading text-lg font-bold">Casa del Alfarero</span>
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="imagenes/logo.png" class="logo-img" alt="Casa del Alfarero" />
+        <span id="nav-name" class="font-heading text-lg font-bold">Casa del Alfarero</span>
+      </div>
+      <div class="hidden md:flex gap-3 items-center">
+        <a href="leer-biblia.html" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-black text-[10px] uppercase tracking-widest shadow-lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>Leer la Biblia</span>
+        </a>
+        <div class="relative">
+          <button id="sections-btn" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-black text-[10px] uppercase tracking-widest shadow-lg">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            <span>Secciones</span>
+          </button>
+          <div id="sections-menu" class="absolute right-0 mt-3 w-56 bg-[#1a1a2e]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl py-3 hidden flex-col z-[60]">
+            <a href="index.html" class="px-5 py-2.5 text-sm text-gray-300 hover:text-yellow-400 hover:bg-white/5 transition-all">Inicio</a>
+            <a href="predicas.html" class="px-5 py-2.5 text-sm text-gray-300 hover:text-yellow-400 hover:bg-white/5 transition-all">Predicas</a>
+            <a href="proyectos.html" class="px-5 py-2.5 text-sm text-gray-300 hover:text-yellow-400 hover:bg-white/5 transition-all">Proyectos</a>
+            <a href="donacion.html" class="px-5 py-2.5 text-sm text-gray-300 hover:text-yellow-400 hover:bg-white/5 transition-all">Donaciones</a>
+          </div>
+        </div>
+      </div>
+      <button id="hamburger-btn" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition-colors">
+        <svg id="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        <svg id="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
     </div>
-    <div class="hidden md:flex gap-3 items-center">
-      <a href="leer-biblia.html" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-black text-[10px] uppercase tracking-widest shadow-lg">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        <span>Leer la Biblia</span>
-      </a>
-      <div class="relative">
-        <button id="sections-btn" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-black text-[10px] uppercase tracking-widest shadow-lg">
-           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-           <span>Secciones</span>
-        </button>
-        <div id="sections-menu" class="absolute right-0 mt-3 w-56 bg-[#1a1a2e]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl py-3 hidden flex-col z-[60]">
-           <a href="index.html" class="px-5 py-2.5 text-sm text-gray-300 hover:text-yellow-400 hover:bg-white/5 transition-all">Inicio</a>
-           <a href="predicas.html" class="px-5 py-2.5 text-sm text-gray-300 hover:text-yellow-400 hover:bg-white/5 transition-all">Predicas</a>
-           <a href="proyectos.html" class="px-5 py-2.5 text-sm text-gray-300 hover:text-yellow-400 hover:bg-white/5 transition-all">Proyectos</a>
-           <a href="donacion.html" class="px-5 py-2.5 text-sm text-gray-300 hover:text-yellow-400 hover:bg-white/5 transition-all">Donaciones</a>
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-start justify-center p-8 pt-28">
+      <div class="w-fit min-w-[280px] max-h-[70vh] overflow-y-auto px-10 bg-white/10 backdrop-blur-3xl rounded-[3rem] shadow-2xl p-10 flex flex-col items-center gap-3 text-center border border-white/20">
+        <a href="leer-biblia.html" class="py-2 text-yellow-400 font-black text-xl hover:text-white transition-colors">Leer la Biblia</a>
+        <a href="musica.html" class="py-2 text-yellow-400 font-black text-xl hover:text-white transition-colors mb-4">Música del día</a>
+        <a href="index.html" data-translate="nav_home" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Inicio</a>
+        <a href="predicas.html" data-translate="nav_predicas" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Predicas</a>
+        <a href="proyectos.html" data-translate="nav_proyectos" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Proyectos</a>
+        <a href="donacion.html" data-translate="nav_donations" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Donaciones</a>
+        <div class="w-full border-t border-white/10 pt-6 mt-4">
+          <p class="text-xs font-black text-white/50 mb-4 uppercase tracking-widest">Idioma</p>
+          <div class="flex flex-wrap justify-center gap-2">
+            <button onclick="changeLanguage('es')" class="px-4 py-2 text-sm font-black rounded-xl bg-yellow-600 text-white shadow-md hover:bg-yellow-500 transition-colors">ES</button>
+            <button onclick="changeLanguage('en')" class="px-4 py-2 text-sm font-black rounded-xl bg-white/10 text-white shadow-md hover:bg-white/20 transition-colors">EN</button>
+            <button onclick="changeLanguage('fr')" class="px-4 py-2 text-sm font-black rounded-xl bg-white/10 text-white shadow-md hover:bg-white/20 transition-colors">FR</button>
+            <button onclick="changeLanguage('pt')" class="px-4 py-2 text-sm font-black rounded-xl bg-white/10 text-white shadow-md hover:bg-white/20 transition-colors">PT</button>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Botón hamburguesa para móvil -->
-    <button id="hamburger-btn" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition-colors">
-      <svg id="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-      <svg id="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-    </button>
-   </div>
-   <!-- Menú móvil -->
-   <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-start justify-center p-8 pt-28">
-     <div class="w-fit min-w-[280px] max-h-[70vh] overflow-y-auto px-10 bg-white/10 backdrop-blur-3xl rounded-[3rem] shadow-2xl p-10 flex flex-col items-center gap-3 text-center border border-white/20">
-       <a href="leer-biblia.html" class="py-2 text-yellow-400 font-black text-xl hover:text-white transition-colors">Leer la Biblia</a>
-       <a href="musica.html" class="py-2 text-yellow-400 font-black text-xl hover:text-white transition-colors mb-4">Música del día</a>
-       <a href="index.html" data-translate="nav_home" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Inicio</a>
-       <a href="predicas.html" data-translate="nav_predicas" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Predicas</a>
-       <a href="proyectos.html" data-translate="nav_proyectos" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Proyectos</a>
-       <a href="donacion.html" data-translate="nav_donations" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Donaciones</a>
-       <div class="w-full border-t border-white/10 pt-6 mt-4">
-         <p class="text-xs font-black text-white/50 mb-4 uppercase tracking-widest">Idioma</p>
-         <div class="flex flex-wrap justify-center gap-2">
-           <button onclick="changeLanguage('es')" class="px-4 py-2 text-sm font-black rounded-xl bg-yellow-600 text-white shadow-md hover:bg-yellow-500 transition-colors">ES</button>
-           <button onclick="changeLanguage('en')" class="px-4 py-2 text-sm font-black rounded-xl bg-white/10 text-white shadow-md hover:bg-white/20 transition-colors">EN</button>
-           <button onclick="changeLanguage('fr')" class="px-4 py-2 text-sm font-black rounded-xl bg-white/10 text-white shadow-md hover:bg-white/20 transition-colors">FR</button>
-           <button onclick="changeLanguage('pt')" class="px-4 py-2 text-sm font-black rounded-xl bg-white/10 text-white shadow-md hover:bg-white/20 transition-colors">PT</button>
-         </div>
-       </div>
-     </div>
-   </div>
   </nav>
 
   <main class="pt-32 pb-20 section-logo-bg">
@@ -74,32 +72,32 @@
 
       <div class="flex flex-col items-center gap-8 animate-fade-up delay-1">
         <!-- Video Principal -->
-        <div class="w-full max-w-3xl group relative p-6 rounded-[3rem] bg-white/[0.03] border border-white/10 shadow-2xl overflow-hidden">
-            <div class="aspect-video rounded-[2rem] overflow-hidden" id="daily-video-wrapper">
+        <div class="w-full max-w-3xl group relative rounded-[3rem] bg-white/[0.03] border border-white/10 shadow-2xl overflow-hidden music-video-container">
+          <div class="aspect-video">
             <iframe id="daily-video-iframe" class="w-full h-full" src="" title="Música de Adoración Diaria" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
-          <div class="mt-6 flex items-center gap-3">
-             <div class="w-2 h-2 rounded-full bg-red-600 animate-incandescent-red"></div>
-             <span class="text-xs font-black text-white/50 uppercase tracking-widest">En Reproducción: Música del día</span>
+          <div class="mt-6 flex items-center gap-3 px-6 pb-6">
+            <div class="w-2 h-2 rounded-full bg-red-600 animate-incandescent-red"></div>
+            <span class="text-xs font-black text-white/50 uppercase tracking-widest">En Reproducción: Música del día</span>
           </div>
         </div>
 
         <!-- Recomendados -->
         <div class="grid md:grid-cols-2 gap-8 w-full max-w-3xl">
-          <div class="group relative p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 shadow-2xl transition-all duration-500 hover:border-yellow-600/40">
-             <h3 class="font-heading text-2xl font-bold text-[#d4af69] mb-4">Música para hoy</h3>
-               <div class="aspect-video rounded-2xl overflow-hidden mb-4">
-               <iframe class="w-full h-full" src="https://www.youtube.com/embed/MFEey7VwwtM?modestbranding=1&rel=1" frameborder="0" allowfullscreen></iframe>
-             </div>
-             <p class="text-gray-400 text-sm">Coritos de avivamiento para fortalecer tu espíritu.</p>
+          <div class="group relative rounded-[2.5rem] bg-white/[0.03] border border-white/10 shadow-2xl transition-all duration-500 hover:border-yellow-600/40 music-video-container overflow-hidden">
+            <h3 class="font-heading text-2xl font-bold text-[#d4af69] mb-4 px-8 pt-8">Música para hoy</h3>
+            <div class="aspect-video">
+              <iframe class="w-full h-full" src="https://www.youtube.com/embed/MFEey7VwwtM?modestbranding=1&rel=1" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p class="text-gray-400 text-sm px-8 pb-8 pt-4">Corinos de avivamiento para fortalecer tu espíritu.</p>
           </div>
-  
-          <div class="group relative p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/10 shadow-2xl transition-all duration-500 hover:border-yellow-600/40">
-             <h3 class="font-heading text-2xl font-bold text-[#d4af69] mb-4">Adoración profunda</h3>
-             <div class="aspect-video rounded-2xl overflow-hidden mb-4">
-               <iframe class="w-full h-full" src="https://www.youtube.com/embed/HQ7hQH9pahY?modestbranding=1&rel=1" frameborder="0" allowfullscreen></iframe>
-             </div>
-             <p class="text-gray-400 text-sm">Momentos de intimidad con el Espíritu Santo.</p>
+
+          <div class="group relative rounded-[2.5rem] bg-white/[0.03] border border-white/10 shadow-2xl transition-all duration-500 hover:border-yellow-600/40 music-video-container overflow-hidden">
+            <h3 class="font-heading text-2xl font-bold text-[#d4af69] mb-4 px-8 pt-8">Adoración profunda</h3>
+            <div class="aspect-video">
+              <iframe class="w-full h-full" src="https://www.youtube.com/embed/HQ7hQH9pahY?modestbranding=1&rel=1" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p class="text-gray-400 text-sm px-8 pb-8 pt-4">Momentos de intimidad con el Espíritu Santo.</p>
           </div>
         </div>
       </div>

@@ -92,7 +92,7 @@ function setupDailyMusic() {
   const selectedVideoId = new URL(selectedVideoUrl).pathname.split('/').pop();
 
   // URL embebible con parámetros para autoplay y recomendaciones
-  const finalUrl = `https://www.youtube.com/embed/${selectedVideoId}?autoplay=1&mute=1&modestbranding=1`;
+  const finalUrl = `https://www.youtube.com/embed/${selectedVideoId}?autoplay=1&mute=1&modestbranding=1&playsinline=1&rel=0`;
   if (musicIframe.src !== finalUrl) {
     musicIframe.src = finalUrl;
   }
@@ -166,9 +166,9 @@ async function searchBibleVerse() {
     
     let versesHtml = `
       <div class="text-left animate-fade-up w-full">
-        <div class="p-8 bg-white rounded-3xl border-l-8 border-yellow-500 shadow-xl flex flex-col md:flex-row md:items-start gap-8">
-          <h4 class="font-black text-[#1a1a2e] text-3xl tracking-tight whitespace-nowrap md:min-w-[250px]">${reference}</h4>
-          <p class="text-gray-800 text-2xl leading-relaxed font-medium italic">"${textClean}"</p>
+        <div class="p-10 md:p-24 bg-white rounded-none border-l-[24px] border-yellow-500 shadow-none flex flex-col md:flex-row md:items-center gap-12 md:gap-24 w-full min-h-[50vh]">
+          <h4 class="font-black text-[#1a1a2e] text-5xl md:text-9xl tracking-tighter whitespace-nowrap leading-none">${reference}</h4>
+          <p class="text-gray-900 text-4xl md:text-7xl leading-tight font-bold italic flex-1">"${textClean}"</p>
         </div>
       </div>`;
     
@@ -184,8 +184,16 @@ async function searchBibleVerse() {
 function openExternalBible(version) {
   const input = document.getElementById('bible-search-input').value;
   if (!input) return;
-  const baseUrl = "https://www.biblegateway.com/passage/?search=";
-  window.open(`${baseUrl}${encodeURIComponent(input)}&version=${version}`, '_blank', 'width=800,height=600');
+  const externalIframe = document.getElementById('bible-external-iframe');
+  const webView = document.getElementById('bible-web-view');
+  
+  if (externalIframe) {
+    externalIframe.src = `https://www.biblegateway.com/passage/?search=${encodeURIComponent(input)}&version=${version}`;
+    if (webView) {
+      webView.classList.remove('hidden');
+      webView.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }
 // Función para actualizar idioma
 function updateLanguage() {
