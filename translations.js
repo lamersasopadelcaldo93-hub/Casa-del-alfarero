@@ -130,8 +130,16 @@ const translations = {
     
     bible_title: 'La Santa Biblia',
     bible_desc: 'Lámpara es a mis pies tu palabra, y lumbrera a mi camino. — Salmos 119:105',
+    bible_search_btn: 'Buscar',
+    bible_compare_title: 'Comparar versiones externas:',
+    bible_results_placeholder: 'Los resultados aparecerán aquí...',
     music_title: 'Música de Adoración',
     music_desc: 'Cantad alegres a Dios, habitantes de toda la tierra. — Salmos 100:1',
+    cdi_growth_title: 'Creciendo en Gracia',
+    cdi_gallery_btn: 'Ver galería completa',
+    cdi_videos_heading: 'Videos CDI-Ovejitas del Jesús',
+    cdi_explore_btn: 'Explorar Videos',
+    vision_title: 'Visión y Misión',
 
     // Footer
     footer_copyright: '© 2026 Casa del Alfarero. Todos los derechos reservados.',
@@ -268,8 +276,16 @@ const translations = {
 
     bible_title: 'The Holy Bible',
     bible_desc: 'Your word is a lamp to my feet and a light to my path. — Psalms 119:105',
+    bible_search_btn: 'Search',
+    bible_compare_title: 'Compare external versions:',
+    bible_results_placeholder: 'Results will appear here...',
     music_title: 'Worship Music',
     music_desc: 'Make a joyful noise unto the Lord, all ye lands. — Psalms 100:1',
+    cdi_growth_title: 'Growing in Grace',
+    cdi_gallery_btn: 'View full gallery',
+    cdi_videos_heading: 'CDI Videos-Ovejitas del Jesús',
+    cdi_explore_btn: 'Explore Videos',
+    vision_title: 'Vision and Mission',
 
     // Footer
     footer_copyright: '© 2026 House of the Potter. All rights reserved.',
@@ -404,8 +420,16 @@ const translations = {
 
     bible_title: 'La Sainte Bible',
     bible_desc: 'Ta parole est une lampe à mes pieds, et une lumière sur mon sentier. — Psaumes 119:105',
+    bible_search_btn: 'Chercher',
+    bible_compare_title: 'Comparer les versions externes :',
+    bible_results_placeholder: 'Les résultats apparaîtront ici...',
     music_title: 'Musique d\'Adoration',
     music_desc: 'Poussez vers l\'Éternel des cris de joie, vous tous, habitants de la terre! — Psaumes 100:1',
+    cdi_growth_title: 'Grandir en Grâce',
+    cdi_gallery_btn: 'Voir la galerie complète',
+    cdi_videos_heading: 'Vidéos CDI-Ovejitas del Jesús',
+    cdi_explore_btn: 'Explorer les vidéos',
+    vision_title: 'Vision et Mission',
     
     // Footer
     footer_copyright: '© 2026 Casa del Alfarero. Tous droits réservés.',
@@ -540,8 +564,16 @@ const translations = {
 
     bible_title: 'A Bíblia Sagrada',
     bible_desc: 'Lâmpada para os meus pés é tua palavra, e luz para o meu caminho. — Salmos 119:105',
+    bible_search_btn: 'Pesquisar',
+    bible_compare_title: 'Comparar versões externas:',
+    bible_results_placeholder: 'Os resultados aparecerão aqui...',
     music_title: 'Música de Adoração',
     music_desc: 'Celebrai com júbilo ao Senhor, todos os moradores da terra. — Salmos 100:1',
+    cdi_growth_title: 'Crescendo na Graça',
+    cdi_gallery_btn: 'Ver galeria completa',
+    cdi_videos_heading: 'Vídeos CDI-Ovejitas del Jesús',
+    cdi_explore_btn: 'Explorar Vídeos',
+    vision_title: 'Visão e Missão',
     
     // Footer
     footer_copyright: '© 2026 Casa del Alfarero. Todos os direitos reservados.',

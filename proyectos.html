@@ -36,13 +36,18 @@
      <span id="nav-name" class="font-heading text-lg font-bold">Casa del Alfarero</span>
     </div>
     <div class="hidden md:flex gap-3 items-center">
+      <!-- Botón CDI -->
+      <a href="cdi.html" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-black text-[10px] uppercase tracking-widest shadow-lg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 5 6.3"/><path d="M12 2v2"/><path d="M8 3.5l1.5 1.5"/><path d="M16 3.5L14.5 5"/></svg>
+        <span>CDI</span>
+      </a>
       <!-- Botón Leer la Biblia -->
-      <a href="leer-biblia.html" target="_blank" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-black text-[10px] uppercase tracking-widest shadow-lg">
+      <a href="leer-biblia.html" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-black text-[10px] uppercase tracking-widest shadow-lg">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         <span>Leer la Biblia</span>
       </a>
       <!-- Botón Música del día -->
-      <a href="musica.html" target="_blank" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-black text-[10px] uppercase tracking-widest shadow-lg">
+      <a href="musica.html" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-black text-[10px] uppercase tracking-widest shadow-lg">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
         <span>Música del día</span>
       </a>
@@ -68,25 +73,44 @@
       </div>
       <!-- Selector de idiomas -->
       <div class="relative">
-        <button id="language-btn" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition-colors text-sm font-semibold text-[#1a1a2e]">
+        <button id="language-btn" class="flex items-center gap-2 px-3 py-2 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition-colors text-sm font-semibold">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
+          <span id="current-language">ES</span>
+        </button>
+        <div id="language-menu" class="absolute right-0 mt-2 w-24 bg-white rounded-lg shadow-lg hidden z-50">
+          <button onclick="changeLanguage('es')" class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">Español</button>
+          <button onclick="changeLanguage('en')" class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">English</button>
+          <button onclick="changeLanguage('fr')" class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">Français</button>
+          <button onclick="changeLanguage('pt')" class="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">Português</button>
+        </div>
+      </div>
     </div>
     <button id="hamburger-btn" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition-colors">
       <svg id="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       <svg id="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
    </div>
-   <!-- Menú móvil (simplificado) -->
-   <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-center justify-center p-8">
-      <div class="bg-[#1a1a2e] w-full max-w-sm rounded-[2rem] p-8 flex flex-col gap-4 text-center border border-white/10">
-        <a href="https://www.bible.com/es" target="_blank" class="text-yellow-400 text-xl font-bold">Leer la Biblia</a>
-        <a href="https://www.youtube.com/results?search_query=musica+cristiana+del+dia" target="_blank" class="text-yellow-400 text-xl font-bold mb-4">Música del día</a>
-        <a href="index.html" class="text-white text-xl font-bold">Inicio</a>
-        <a href="predicas.html" class="text-white text-xl font-bold">Predicas</a>
-        <a href="proyectos.html" class="text-yellow-400 text-xl font-bold">Proyectos</a>
-        <a href="donacion.html" class="text-white text-xl font-bold">Donaciones</a>
-        <button onclick="closeAlbum()" class="mt-4 py-3 bg-white/10 text-white rounded-xl">Cerrar</button>
-      </div>
-    </div>
+   <!-- Menú móvil -->
+   <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-start justify-center p-8 pt-28">
+     <div class="w-fit min-w-[280px] max-h-[70vh] overflow-y-auto px-10 bg-white/10 backdrop-blur-3xl rounded-[3rem] shadow-2xl p-10 flex flex-col items-center gap-3 text-center border border-white/20">
+       <a href="cdi.html" class="py-2 text-yellow-400 font-black text-xl hover:text-white transition-colors">CDI</a>
+       <a href="leer-biblia.html" class="py-2 text-yellow-400 font-black text-xl hover:text-white transition-colors">Leer la Biblia</a>
+       <a href="musica.html" class="py-2 text-yellow-400 font-black text-xl hover:text-white transition-colors mb-4">Música del día</a>
+       <a href="index.html#inicio" data-translate="nav_home" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Inicio</a>
+       <a href="predicas.html" data-translate="nav_predicas" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Predicas</a>
+       <a href="proyectos.html" data-translate="nav_proyectos" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Proyectos</a>
+       <a href="donacion.html" data-translate="nav_donations" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Donaciones</a>
+       <div class="w-full border-t border-white/10 pt-6 mt-4">
+         <p class="text-xs font-black text-white/50 mb-4 uppercase tracking-widest">Idioma</p>
+         <div class="flex flex-wrap justify-center gap-2">
+           <button onclick="changeLanguage('es')" class="px-4 py-2 text-sm font-black rounded-xl bg-yellow-600 text-white shadow-md hover:bg-yellow-500 transition-colors">ES</button>
+           <button onclick="changeLanguage('en')" class="px-4 py-2 text-sm font-black rounded-xl bg-white/10 text-white shadow-md hover:bg-white/20 transition-colors">EN</button>
+           <button onclick="changeLanguage('fr')" class="px-4 py-2 text-sm font-black rounded-xl bg-white/10 text-white shadow-md hover:bg-white/20 transition-colors">FR</button>
+           <button onclick="changeLanguage('pt')" class="px-4 py-2 text-sm font-black rounded-xl bg-white/10 text-white shadow-md hover:bg-white/20 transition-colors">PT</button>
+         </div>
+       </div>
+     </div>
+   </div>
   </nav>
 
   <main class="w-full pt-32 pb-24 px-[10px]">

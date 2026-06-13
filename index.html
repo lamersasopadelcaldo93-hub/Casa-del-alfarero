@@ -71,6 +71,11 @@
     </div>
     <!-- Menú de escritorio -->
     <div class="hidden md:flex gap-3 items-center">
+      <!-- Botón CDI -->
+      <a href="cdi.html" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-black text-[10px] uppercase tracking-widest shadow-lg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 5 6.3"/><path d="M12 2v2"/><path d="M8 3.5l1.5 1.5"/><path d="M16 3.5L14.5 5"/></svg>
+        <span>CDI</span>
+      </a>
       <!-- Botón Leer la Biblia -->
       <a href="leer-biblia.html" class="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all font-black text-[10px] uppercase tracking-widest shadow-lg">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -116,7 +121,7 @@
       </div>
     </div>
     <!-- Botón hamburguesa para móvil -->
-    <button id="hamburger-btn" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition-colors">
+    <button id="hamburger-btn" class="md:hidden relative z-[110] flex items-center justify-center w-10 h-10 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition-colors">
       <svg id="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       <svg id="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
@@ -124,6 +129,7 @@
    <!-- Menú móvil -->
    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-start justify-center p-8 pt-28">
      <div class="w-fit min-w-[280px] max-h-[70vh] overflow-y-auto px-10 bg-white/10 backdrop-blur-3xl rounded-[3rem] shadow-2xl p-10 flex flex-col items-center gap-3 text-center border border-white/20">
+       <a href="cdi.html" class="py-2 text-yellow-400 font-black text-xl hover:text-white transition-colors">CDI</a>
        <a href="leer-biblia.html" class="py-2 text-yellow-400 font-black text-xl hover:text-white transition-colors">Leer la Biblia</a>
        <a href="musica.html" class="py-2 text-yellow-400 font-black text-xl hover:text-white transition-colors mb-4">Música del día</a>
        <a href="#inicio" data-translate="nav_home" class="py-2 text-white font-black text-xl hover:text-yellow-400 transition-colors">Inicio</a>
@@ -332,7 +338,7 @@
      <h2 class="font-heading text-4xl md:text-5xl font-bold mb-4 services-dark-text" data-translate="activities_heading">Nuestras Actividades</h2>
      <div class="gold-line mx-auto"></div>
     </div>
-     <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-6 gap-y-12 max-w-[1400px] mx-auto">
+     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 max-w-[1400px] mx-auto px-4">
       <!-- Culto Dominical -->
       <article class="folder-card animate-fade-up delay-1 rounded-[2.5rem] py-8 px-6 group flex flex-col sm:flex-row lg:flex-col xl:flex-row items-center gap-6 w-full relative">
        <div class="w-full sm:w-[38%] lg:w-full xl:w-[38%] shrink-0">
